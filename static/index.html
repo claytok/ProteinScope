@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProteinScope</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,14 +34,6 @@
                         </button>
                     </div>
                     
-                    <!-- Backend Status -->
-                    <div class="backend-status" id="backendStatus">
-                        <div class="status-indicator">
-                            <span class="status-dot" id="statusDot"></span>
-                            <span class="status-text" id="statusText">Checking backend...</span>
-                        </div>
-                    </div>
-                    
                     <!-- Example Proteins -->
                     <div class="examples-section">
                         <h3 class="examples-title">Try these examples:</h3>
@@ -57,7 +50,7 @@
                     <!-- Protein Info Cards -->
                     <div class="info-cards">
                         <div class="info-card">
-                            <div class="card-icon">🧬</div>
+                            <div class="card-icon">MW</div>
                             <div class="card-content">
                                 <h4 class="card-title">Molecular Weight</h4>
                                 <p class="card-value" id="molecularWeight">-</p>
@@ -66,7 +59,7 @@
                         </div>
                         
                         <div class="info-card">
-                            <div class="card-icon">⚛️</div>
+                            <div class="card-icon">AT</div>
                             <div class="card-content">
                                 <h4 class="card-title">Atoms</h4>
                                 <p class="card-value" id="atomCount">-</p>
@@ -75,7 +68,7 @@
                         </div>
                         
                         <div class="info-card">
-                            <div class="card-icon">🔗</div>
+                            <div class="card-icon">RS</div>
                             <div class="card-content">
                                 <h4 class="card-title">Residues</h4>
                                 <p class="card-value" id="residueCount">-</p>
@@ -84,7 +77,7 @@
                         </div>
                         
                         <div class="info-card">
-                            <div class="card-icon">⚡</div>
+                            <div class="card-icon">CH</div>
                             <div class="card-content">
                                 <h4 class="card-title">Charge</h4>
                                 <p class="card-value" id="charge">-</p>
@@ -100,22 +93,26 @@
                             <p class="viz-subtitle" id="proteinName">-</p>
                             <div class="viz-controls">
                                 <button class="viz-mode-btn active" data-mode="backbone" id="backboneBtn">
-                                    <span class="btn-icon">🔗</span>
+                                    <span class="btn-icon">BB</span>
                                     <span class="btn-text">Backbone</span>
                                 </button>
+                                <button class="viz-mode-btn" data-mode="secondary" id="secondaryBtn">
+                                    <span class="btn-icon">SS</span>
+                                    <span class="btn-text">Secondary</span>
+                                </button>
                                 <button class="viz-mode-btn" data-mode="surface" id="surfaceBtn">
-                                    <span class="btn-icon">🌐</span>
+                                    <span class="btn-icon">SF</span>
                                     <span class="btn-text">Surface</span>
                                 </button>
                                 <button class="viz-mode-btn" data-mode="atoms" id="atomsBtn">
-                                    <span class="btn-icon">⚛️</span>
+                                    <span class="btn-icon">AT</span>
                                     <span class="btn-text">Atoms</span>
                                 </button>
                             </div>
                         </div>
                         <div class="plot-container" id="plotContainer">
                             <div class="plot-placeholder">
-                                <div class="placeholder-icon">🧬</div>
+                                <div class="placeholder-icon">P</div>
                                 <p>Enter a PDB ID to visualize the protein structure</p>
                             </div>
                         </div>
@@ -136,7 +133,7 @@
             <!-- Error Section -->
             <section class="error-section" id="errorSection" style="display: none;">
                 <div class="error-container">
-                    <div class="error-icon">⚠️</div>
+                    <div class="error-icon">!</div>
                     <h3 class="error-title">Analysis Error</h3>
                     <p class="error-message" id="errorMessage"></p>
                 </div>

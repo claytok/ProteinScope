@@ -1,0 +1,4 @@
+requests==2.31.0
+biopython==1.81
+plotly==5.17.0
+numpy==1.24.3 

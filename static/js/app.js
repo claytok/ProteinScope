@@ -16,9 +16,8 @@ class ProteinVisualizer {
             return 'http://localhost:8080';
         }
         
-        // For production - replace with your deployed backend URL
-        // Example: return 'https://your-backend.herokuapp.com';
-        return 'https://your-backend-url.herokuapp.com'; // CHANGE THIS
+        // For Netlify deployment - use the serverless function
+        return '/.netlify/functions/api';
     }
 
     initializeElements() {
