@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteinScope</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">ProteinScope</h1>
+                <p class="app-subtitle">Explore protein structures with molecular precision</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-container">
+                    <div class="search-box">
+                        <input type="text" id="pdbInput" placeholder="Enter PDB ID (e.g., 1HHB)" class="search-input">
+                        <button id="analyzeBtn" class="analyze-btn">
+                            <span class="btn-text">Analyze</span>
+                            <div class="loading-spinner" id="loadingSpinner"></div>
+                        </button>
+                    </div>
+                    
+                    <!-- Example Proteins -->
+                    <div class="examples-section">
+                        <h3 class="examples-title">Try these examples:</h3>
+                        <div class="examples-grid" id="examplesGrid">
+                            <!-- Examples will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-container">
+                    <!-- Protein Info Cards -->
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <div class="card-icon">🧬</div>
+                            <div class="card-content">
+                                <h4 class="card-title">Molecular Weight</h4>
+                                <p class="card-value" id="molecularWeight">-</p>
+                                <p class="card-unit">Da</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="card-icon">⚛️</div>
+                            <div class="card-content">
+                                <h4 class="card-title">Atoms</h4>
+                                <p class="card-value" id="atomCount">-</p>
+                                <p class="card-unit">total</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="card-icon">🔗</div>
+                            <div class="card-content">
+                                <h4 class="card-title">Residues</h4>
+                                <p class="card-value" id="residueCount">-</p>
+                                <p class="card-unit">amino acids</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-content">
+                                <h4 class="card-title">Charge</h4>
+                                <p class="card-value" id="charge">-</p>
+                                <p class="card-unit">at pH 7.4</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Visualization -->
+                    <div class="visualization-container">
+                        <div class="viz-header">
+                            <h3 class="viz-title">3D Structure</h3>
+                            <p class="viz-subtitle" id="proteinName">-</p>
+                            <div class="viz-controls">
+                                <button class="viz-mode-btn active" data-mode="backbone" id="backboneBtn">
+                                    <span class="btn-icon">🔗</span>
+                                    <span class="btn-text">Backbone</span>
+                                </button>
+                                <button class="viz-mode-btn" data-mode="secondary" id="secondaryBtn">
+                                    <span class="btn-icon">🧬</span>
+                                    <span class="btn-text">Secondary</span>
+                                </button>
+                                <button class="viz-mode-btn" data-mode="surface" id="surfaceBtn">
+                                    <span class="btn-icon">🌐</span>
+                                    <span class="btn-text">Surface</span>
+                                </button>
+                                <button class="viz-mode-btn" data-mode="atoms" id="atomsBtn">
+                                    <span class="btn-icon">⚛️</span>
+                                    <span class="btn-text">Atoms</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="plot-container" id="plotContainer">
+                            <div class="plot-placeholder">
+                                <div class="placeholder-icon">🧬</div>
+                                <p>Enter a PDB ID to visualize the protein structure</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Information -->
+                    <div class="details-section">
+                        <div class="details-card">
+                            <h4 class="details-title">Residue Composition</h4>
+                            <div class="residue-list" id="residueList">
+                                <!-- Residue types will be listed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section" id="errorSection" style="display: none;">
+                <div class="error-container">
+                    <div class="error-icon">⚠️</div>
+                    <h3 class="error-title">Analysis Error</h3>
+                    <p class="error-message" id="errorMessage"></p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> 
