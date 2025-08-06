@@ -28,6 +28,8 @@ class ProteinVisualizer {
         this.errorSection = document.getElementById('errorSection');
         this.examplesGrid = document.getElementById('examplesGrid');
         this.plotContainer = document.getElementById('plotContainer');
+        
+        // Optional elements that might not exist in static version
         this.backendStatus = document.getElementById('backendStatus');
         this.statusDot = document.getElementById('statusDot');
         this.statusText = document.getElementById('statusText');
@@ -101,6 +103,11 @@ class ProteinVisualizer {
     }
 
     async checkBackendStatus() {
+        // Skip backend status check if elements don't exist (static version)
+        if (!this.backendStatus || !this.statusDot || !this.statusText) {
+            return;
+        }
+        
         try {
             const response = await fetch(`${this.backendUrl}/examples`, {
                 method: 'GET',
@@ -123,6 +130,18 @@ class ProteinVisualizer {
     }
 
     async loadExamples() {
+        // For static version, always use fallback examples
+        if (this.backendUrl.includes('netlify')) {
+            this.renderExamples([
+                {id: '1HHB', name: 'Hemoglobin', description: 'Oxygen transport protein'},
+                {id: '1UBQ', name: 'Ubiquitin', description: 'Small regulatory protein'},
+                {id: '1CRN', name: 'Crambin', description: 'Plant seed protein'},
+                {id: '1GFL', name: 'Green Fluorescent Protein', description: 'Fluorescent protein'},
+                {id: '1TIM', name: 'Triosephosphate Isomerase', description: 'Enzyme'}
+            ]);
+            return;
+        }
+        
         try {
             const response = await fetch(`${this.backendUrl}/examples`);
             const examples = await response.json();
@@ -178,7 +197,7 @@ class ProteinVisualizer {
         const vizMode = activeButton ? activeButton.getAttribute('data-mode') : 'backbone';
 
         try {
-            const response = await fetch(`${this.backendUrl}/analyze`, {
+            const response = await fetch(`${this.backendUrl}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -189,16 +208,20 @@ class ProteinVisualizer {
                 })
             });
 
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
             const data = await response.json();
 
-            if (response.ok) {
+            if (data.success) {
                 this.displayResults(data);
             } else {
                 this.showError(data.error || 'An error occurred while analyzing the protein');
             }
         } catch (error) {
             console.error('Error:', error);
-            this.showError('Network error. Please check if the backend is running.');
+            this.showError(`Network error: ${error.message}. Please check if the backend is running.`);
         } finally {
             this.setLoading(false);
         }
@@ -208,7 +231,7 @@ class ProteinVisualizer {
         if (!this.currentPdbId) return;
         
         try {
-            const response = await fetch(`${this.backendUrl}/analyze`, {
+            const response = await fetch(`${this.backendUrl}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -219,14 +242,16 @@ class ProteinVisualizer {
                 })
             });
 
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
             const data = await response.json();
 
-            if (response.ok) {
+            if (data.success && data.plot_data) {
                 // Update only the visualization, not the entire results
-                if (data.plot_data) {
-                    this.currentPlotData = data.plot_data;
-                    this.create3DVisualization(data.plot_data, mode);
-                }
+                this.currentPlotData = data.plot_data;
+                this.create3DVisualization(data.plot_data, mode);
             } else {
                 console.error('Error switching visualization mode:', data.error);
             }
