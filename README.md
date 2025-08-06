@@ -1,220 +1,123 @@
 # ProteinScope
 
-A modern, Apple-inspired web application for visualizing and analyzing protein structures from the Protein Data Bank (PDB). Built with Python Flask, BioPython, and Plotly for interactive 3D visualizations.
+A modern web application for 3D protein structure visualization and analysis using Flask and Plotly.
 
-## 🧬 Features
+## 🚀 Features
 
-### Core Functionality
-- **3D Protein Visualization**: Interactive 3D plots using Plotly
-- **Molecular Analysis**: Calculate molecular weight, charge, and structural properties
-- **Real-time PDB Fetching**: Direct access to Protein Data Bank structures
-- **Comprehensive Metrics**: Atom count, residue composition, and more
+### **4 Distinct Visualization Modes**
+- **🔗 Backbone Mode**: Protein backbone with residue-type coloring and secondary structure highlighting
+- **🧬 Secondary Structure Mode**: Focused view of helices, sheets, and coils with distinct colors
+- **🌐 Surface Mode**: Surface-like representation with larger markers for molecular surface visualization
+- **⚛️ Atoms Mode**: Detailed atomic view with element-specific colors and sizes
 
-### Apple-Inspired Design
-- **Clean Typography**: SF Pro Display font family
-- **Subtle Animations**: Smooth transitions and hover effects
-- **Glass Morphism**: Backdrop blur and translucent elements
-- **Responsive Layout**: Optimized for all device sizes
-- **Minimalist Interface**: Focus on content with elegant styling
+### **Advanced Protein Analysis**
+- Real-time PDB structure retrieval
+- Secondary structure detection and visualization
+- Molecular weight and charge calculations
+- Residue type analysis
+- Interactive 3D plots with Plotly
 
-## 🚀 Quick Start
+### **Modern Web Interface**
+- Responsive design for desktop and mobile
+- Real-time visualization updates
+- Interactive 3D protein viewer
+- Clean, modern UI with smooth animations
+
+## 🛠️ Installation
 
 ### Prerequisites
-- Python 3.8 or higher
-- pip package manager
+- Python 3.7+
+- pip
 
-### Installation
+### Setup
+```bash
+# Clone the repository
+git clone https://github.com/claytok/ProteinScope.git
+cd ProteinScope
 
-1. **Clone the repository**
-   ```bash
-       git clone <repository-url>
-    cd proteinscope
-   ```
+# Install dependencies
+pip install -r requirements.txt
 
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the application**
-   ```bash
-   python app.py
-   ```
-
-4. **Open your browser**
-   Navigate to `http://localhost:8080`
-
-## 🎯 How to Use
-
-### Basic Usage
-1. Enter a PDB ID (e.g., `1HHB` for hemoglobin)
-2. Click "Analyze" or press Enter
-3. View the 3D structure and protein properties
-
-### Example Proteins
-The app includes several example proteins to try:
-- **1HHB**: Hemoglobin (oxygen transport)
-- **1UBQ**: Ubiquitin (regulatory protein)
-- **1CRN**: Crambin (plant protein)
-- **1GFL**: Green Fluorescent Protein
-- **1TIM**: Triosephosphate Isomerase (enzyme)
-
-### Features Explained
-
-#### 3D Visualization
-- **Interactive Plot**: Rotate, zoom, and pan the protein structure
-- **Color-coded Atoms**: Different elements shown in distinct colors
-- **Responsive Design**: Works on desktop and mobile devices
-
-#### Protein Analysis
-- **Molecular Weight**: Calculated from atomic composition
-- **Net Charge**: Estimated charge at pH 7.4
-- **Residue Count**: Total amino acid residues
-- **Atom Count**: Total number of atoms in structure
-
-## 🛠 Technical Details
-
-### Backend (Python/Flask)
-- **BioPython**: Protein structure parsing and analysis
-- **Plotly**: 3D visualization generation
-- **Flask**: Web server and API endpoints
-- **Requests**: PDB data fetching
-
-### Frontend (HTML/CSS/JavaScript)
-- **Vanilla JavaScript**: No framework dependencies
-- **CSS Grid/Flexbox**: Modern layout techniques
-- **Plotly.js**: Client-side 3D plotting
-- **Responsive Design**: Mobile-first approach
-
-### Key Components
-
-#### ProteinAnalyzer Class
-```python
-class ProteinAnalyzer:
-    def fetch_pdb(self, pdb_id)          # Fetch from PDB
-    def parse_structure(self, pdb_data)   # Parse PDB format
-    def calculate_molecular_weight(self)   # Calculate MW
-    def calculate_charge(self)            # Estimate charge
-    def create_3d_visualization(self)     # Generate 3D plot
+# Run the application
+python3 app.py
 ```
 
-#### Frontend JavaScript
-```javascript
-class ProteinVisualizer {
-    async analyzeProtein()           # API communication
-    displayResults(data)            # Update UI
-    create3DVisualization(plotData) # Render 3D plot
-    animateValue(element, value)    # Smooth animations
-}
+The application will be available at `http://localhost:8080`
+
+## 📦 Dependencies
+
+- **Flask**: Web framework
+- **Plotly**: Interactive 3D visualizations
+- **BioPython**: Protein structure analysis
+- **NumPy**: Numerical computations
+- **Requests**: HTTP requests for PDB data
+
+## 🎯 Usage
+
+1. **Enter a PDB ID** (e.g., "1HHB" for hemoglobin)
+2. **Select a visualization mode**:
+   - **Backbone**: Best for overall structure overview
+   - **Secondary**: Ideal for studying secondary structure elements
+   - **Surface**: Great for surface analysis and interactions
+   - **Atoms**: Detailed atomic-level examination
+3. **Click "Analyze Protein"** to generate the 3D visualization
+4. **Interact** with the 3D plot using mouse controls
+
+## 🔧 Technical Details
+
+### **Fixed Issues**
+- ✅ **Visualization Mode Differentiation**: All four modes now produce distinctly different visualizations
+- ✅ **Secondary Structure Detection**: Improved algorithm for realistic secondary structure assignment
+- ✅ **Color Coding**: Element-specific and structure-specific color schemes
+- ✅ **Performance**: Optimized rendering for large protein structures
+
+### **Architecture**
+- **Backend**: Flask REST API with BioPython integration
+- **Frontend**: Modern HTML5/CSS3/JavaScript with Plotly.js
+- **Data**: Real-time PDB data retrieval via BioPython
+- **Visualization**: Interactive 3D plots with Plotly
+
+## 🌐 Deployment
+
+### Local Development
+```bash
+python3 app.py
 ```
 
-## 🎨 Design Philosophy
+### Production Deployment
+The application includes deployment configurations for:
+- Heroku (Procfile)
+- Netlify (netlify.toml)
+- Docker support
 
-### Apple-Inspired Elements
-- **Typography**: SF Pro Display for clean, readable text
-- **Color Palette**: Subtle grays with blue accents
-- **Shadows**: Soft, layered depth effects
-- **Animations**: Smooth, purposeful transitions
-- **Spacing**: Generous whitespace for clarity
+## 📊 Example PDB IDs
 
-### User Experience
-- **Progressive Disclosure**: Information revealed as needed
-- **Loading States**: Clear feedback during processing
-- **Error Handling**: Helpful error messages
-- **Accessibility**: Keyboard navigation and screen reader support
-
-## 🔬 Scientific Accuracy
-
-### Molecular Weight Calculation
-Uses standard atomic weights:
-- Carbon (C): 12.01 Da
-- Nitrogen (N): 14.01 Da
-- Oxygen (O): 16.00 Da
-- Sulfur (S): 32.07 Da
-- Hydrogen (H): 1.008 Da
-
-### Charge Estimation
-Simplified calculation at pH 7.4:
-- **Positive**: Arginine (ARG), Lysine (LYS)
-- **Negative**: Aspartic acid (ASP), Glutamic acid (GLU)
-- **Neutral**: Histidine (HIS) - slightly positive
-
-## 🚀 Performance Features
-
-### Optimization
-- **Lazy Loading**: 3D plots generated on-demand
-- **Caching**: PDB data cached during session
-- **Responsive Images**: Optimized for different screen sizes
-- **Minimal Dependencies**: Lightweight, fast loading
-
-### Browser Compatibility
-- **Modern Browsers**: Chrome, Firefox, Safari, Edge
-- **Mobile Support**: Touch gestures and responsive design
-- **Progressive Enhancement**: Works without JavaScript (basic features)
-
-## 🔧 Customization
-
-### Adding New Features
-1. **Backend**: Extend `ProteinAnalyzer` class
-2. **Frontend**: Add new UI components
-3. **Styling**: Modify CSS variables for theming
-
-### Example: Add Hydrophobicity Analysis
-```python
-def calculate_hydrophobicity(self, structure):
-    # Add hydrophobicity calculation
-    pass
-```
-
-## 📊 Comparison with PyMOL
-
-### Advantages of This Tool
-- **Web-based**: No installation required
-- **Accessible**: Works on any device with a browser
-- **Educational**: Simplified interface for learning
-- **Customizable**: Easy to modify and extend
-- **Modern UI**: Apple-inspired design aesthetic
-
-### PyMOL Advantages
-- **Professional-grade**: Industry standard
-- **Advanced Features**: Complex analysis tools
-- **Performance**: Optimized for large structures
-- **Scripting**: Extensive automation capabilities
+Try these popular protein structures:
+- `1HHB` - Hemoglobin
+- `1CRN` - Crambin
+- `1UBQ` - Ubiquitin
+- `1GFL` - Green fluorescent protein
+- `1TIM` - Triosephosphate isomerase
 
 ## 🤝 Contributing
 
-### Development Setup
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-### Code Style
-- **Python**: PEP 8 compliance
-- **JavaScript**: ES6+ with consistent formatting
-- **CSS**: BEM methodology for class names
-- **Documentation**: Clear docstrings and comments
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📝 License
 
-This project is open source and available under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
-- **BioPython**: For protein structure handling
-- **Plotly**: For 3D visualization capabilities
-- **Protein Data Bank**: For structural data
-- **Apple Design Guidelines**: For UI/UX inspiration
-
-## 📞 Support
-
-For questions or issues:
-1. Check the documentation
-2. Search existing issues
-3. Create a new issue with details
-4. Include system information and error messages
+- **BioPython** for protein structure analysis
+- **Plotly** for interactive 3D visualizations
+- **Flask** for the web framework
+- **PDB** for providing protein structure data
 
 ---
 
-**Built with ❤️ for the structural biology community** 
+**ProteinScope** - Making protein structure visualization accessible and interactive! 🧬✨ 
