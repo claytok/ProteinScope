@@ -280,8 +280,17 @@ class ProteinVisualizer {
 
         // Create 3D visualization
         if (plot_data) {
+            console.log('Received plot_data:', plot_data);
             this.currentPlotData = plot_data;
             this.create3DVisualization(plot_data, 'backbone'); // Default to backbone mode
+        } else {
+            console.error('No plot_data received from API');
+            this.plotContainer.innerHTML = `
+                <div class="plot-placeholder">
+                    <div class="placeholder-icon">⚠️</div>
+                    <p>No visualization data received</p>
+                </div>
+            `;
         }
 
         // Show results with animation
@@ -345,7 +354,15 @@ class ProteinVisualizer {
 
     create3DVisualization(plotData, mode = 'backbone') {
         try {
-            const plotConfig = JSON.parse(plotData);
+            console.log('Creating 3D visualization with data:', plotData);
+            
+            // plotData is already a JavaScript object, no need to parse
+            const plotConfig = plotData;
+            
+            // Validate plot data structure
+            if (!plotConfig || !plotConfig.data || !plotConfig.layout) {
+                throw new Error('Invalid plot data structure');
+            }
             
             // Clear previous plot
             this.plotContainer.innerHTML = '';
